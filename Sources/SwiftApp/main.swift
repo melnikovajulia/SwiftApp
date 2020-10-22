@@ -1,5 +1,4 @@
 import Foundation
-var done = false
 var flag = false
 var arrayAgr:Array<String> 
 arrayAgr = CommandLine.arguments
@@ -32,7 +31,7 @@ if CommandLine.arguments.count == 3 {
 if CommandLine.arguments.count == 1 {
     FindAll()
 }
-if CommandLine.arguments.count == 0 || flag == false  {
+if flag == false  {
     print("Not found")
 }
 
