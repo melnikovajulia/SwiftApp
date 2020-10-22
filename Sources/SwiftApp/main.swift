@@ -1,4 +1,5 @@
 import Foundation
+var done = false
 var flag = false
 var arrayAgr:Array<String> 
 arrayAgr = CommandLine.arguments
@@ -31,7 +32,7 @@ if CommandLine.arguments.count == 3 {
 if CommandLine.arguments.count == 1 {
     FindAll()
 }
-if flag == false{
+if CommandLine.arguments.count == 0 || flag == false  {
     print("Not found")
 }
 
@@ -42,6 +43,7 @@ func FindKey(key:String) -> String{
             clue = arrayAgr[i+1]
         }
     }
+   
     return clue
 
 }
@@ -51,20 +53,20 @@ func FindWithKeyL(l:String){
         for (language,word3) in word2{
             if l == language{
                 print("\(language)=\(word3)")
+                flag = true
             }
         }
     }
-flag = true
 }
 func FindWithKeyK(k:String) {
     for (word1,word2) in words{
         if k == word1{
             for (language,word3) in word2{
                 print("\(language):\(word3)")
+                flag = true
             }
         }
     }
-flag = true
 }
 
 func FindWithKeyKAndL(k:String,l:String){
@@ -73,12 +75,11 @@ func FindWithKeyKAndL(k:String,l:String){
             for (language,word3) in word2{
                 if l==language{
                     print("\(word3)")
-
+                    flag = true
                 }
             }
         }
     }
-flag = true
 }
 
 func FindAll(){
@@ -86,8 +87,8 @@ func FindAll(){
         print("\(word1)")
             for (language,word3) in word2{
             print("\(language):\(word3)") 
+            flag = true
         }
     }
-flag = true
 } 
 
