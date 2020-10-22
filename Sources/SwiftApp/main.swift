@@ -48,10 +48,10 @@ func FindKey(key:String) -> String{
 }
 
 func FindWithKeyL(l:String){
-    for (_,word2) in words{
+    for (word1,word2) in words{
         for (language,word3) in word2{
             if l == language{
-                print("\(language)=\(word3)")
+                print("\(word1)=\(word3)")
                 flag = true
             }
         }
