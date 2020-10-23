@@ -2,6 +2,7 @@ import Foundation
 var flag = false
 var arrayAgr:Array<String> 
 arrayAgr = CommandLine.arguments
+let path = "words.json"
 var k = ""
 var l = ""
 

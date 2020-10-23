@@ -1,0 +1,8 @@
+{
+    "hello": { "en": "Hello","ru": "Привет","es": "Hola"},
+    "day": {"en":"Day","ru": "День","pt":"Dia"},
+    "night": {"en":"Night","ru": "Ночь","ita":"Notte"},
+    "cat":{"en":"Cat","ru": "Кот","tur":"Kedi"},
+    "house":{"en":"House","ru": "Дом","tur":"Domo"}
+
+}
