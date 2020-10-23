@@ -1,14 +1,18 @@
 import Foundation
+import ArgumentParser
+
 var flag = false
 var arrayAgr:Array<String> 
 arrayAgr = CommandLine.arguments
 let path = "words.json"
-var k = ""
-var l = ""
+let jsonFile = FileManager.default.contents(atPath: path)
+var words: [String: [String: String]] = [:]
 
-var words: [String:[String:String]] = ["hello":["ru":"Привет","en":"Hello","es":"Hola"],"day":["ru":"День","en":"Day","pt":"Dia"]]
 
-if CommandLine.arguments.count == 5 {
+words = try JSONDecoder().decode([String: [String: String]], from: jsonFile)
+
+
+/*if CommandLine.arguments.count == 5 {
     FindWithKeyKAndL(k:FindKey(key:"-k"),l:FindKey(key:"-l"))
 
 }
@@ -31,7 +35,7 @@ if CommandLine.arguments.count == 3 {
 
 if CommandLine.arguments.count == 1 {
     FindAll()
-}
+}*/
 if flag == false  {
     print("Not found")
 }
@@ -92,3 +96,31 @@ func FindAll(){
     }
 } 
 
+struct LocalizationApp: ParsableArguments {
+   
+    
+    @Option(name: .shortAndLong, help: "The word selected for translation")
+    var key: String?
+    
+    @Option(name: .shortAndLong, help: "Language selected for translation")
+    var language: String?
+
+    func run() throws {
+
+        if  language == nil, let key:String = key {
+            FindWithKeyK(k:FindKey(key:"-k"))
+        }
+        else if  key == nil, let language:String = language{
+            FindWithKeyL(l:FindKey(key:"-l"))
+        } 
+        else if  let key:String = key, let language:String = language{
+            FindWithKeyKAndL(k:FindKey(key:"-k"),l:FindKey(key:"-l"))
+        } 
+        else if key == nil, language == nil{
+            FindAll()
+        }
+
+    }
+}
+
+LocalizationApp.main()
