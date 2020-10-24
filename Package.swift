@@ -16,9 +16,8 @@ let package = Package(
         .target(
             name: "SwiftApp",
             dependencies: [.product(name: "ArgumentParser", package: "swift-argument-parser")],
-            resources:[
-                .process("Resources/strings.json")
-            ]
+            resources: [.process("words.json")]
+            
             ),
         .testTarget(
             name: "SwiftAppTests",

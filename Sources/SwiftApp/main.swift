@@ -5,40 +5,16 @@ var flag = false
 var arrayAgr:Array<String> 
 arrayAgr = CommandLine.arguments
 let path = "words.json"
-let jsonFile = FileManager.default.contents(atPath: path)
-var words: [String: [String: String]] = [:]
+var words: [String: [String: String]]
 
-
-words = try JSONDecoder().decode([String: [String: String]], from: jsonFile)
-
-
-/*if CommandLine.arguments.count == 5 {
-    FindWithKeyKAndL(k:FindKey(key:"-k"),l:FindKey(key:"-l"))
-
+guard let jsonFile = FileManager.default.contents(atPath: path)
+else{
+    exit(0)
 }
 
-if CommandLine.arguments.count == 3 {
-    guard CommandLine.arguments[1] == "-k" || CommandLine.arguments[1] == "-l" 
-    else {
-       exit(0)
-    }
-    if CommandLine.arguments[1] == "-k"{
-        FindWithKeyK(k:FindKey(key:"-k"))
+words = (try? JSONDecoder().decode([String: [String: String]].self, from:jsonFile)) ?? [:]
 
-    }
-    if CommandLine.arguments[1] == "-l"{
-        FindWithKeyL(l:FindKey(key:"-l"))
 
-    }
-
-}
-
-if CommandLine.arguments.count == 1 {
-    FindAll()
-}*/
-if flag == false  {
-    print("Not found")
-}
 
 func FindKey(key:String) -> String{
     var clue = ""
@@ -96,7 +72,7 @@ func FindAll(){
     }
 } 
 
-struct LocalizationApp: ParsableArguments {
+struct Translator: ParsableCommand {
    
     
     @Option(name: .shortAndLong, help: "The word selected for translation")
@@ -108,19 +84,22 @@ struct LocalizationApp: ParsableArguments {
     func run() throws {
 
         if  language == nil, let key:String = key {
-            FindWithKeyK(k:FindKey(key:"-k"))
+            FindWithKeyK(k:key)
         }
         else if  key == nil, let language:String = language{
-            FindWithKeyL(l:FindKey(key:"-l"))
+            FindWithKeyL(l:language)
         } 
         else if  let key:String = key, let language:String = language{
-            FindWithKeyKAndL(k:FindKey(key:"-k"),l:FindKey(key:"-l"))
+            FindWithKeyKAndL(k:key,l:language)
         } 
         else if key == nil, language == nil{
             FindAll()
+        }
+        if flag == false  {
+            print("Not found")
         }
 
     }
 }
 
-LocalizationApp.main()
+Translator.main()
