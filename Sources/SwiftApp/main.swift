@@ -2,9 +2,7 @@ import Foundation
 import ArgumentParser
 
 var flag = false
-var arrayAgr:Array<String> 
-arrayAgr = CommandLine.arguments
-let path = "words.json"
+let path = "Sources/SwiftApp/words.json"
 var words: [String: [String: String]]
 
 guard let jsonFile = FileManager.default.contents(atPath: path)
@@ -13,20 +11,6 @@ else{
 }
 
 words = (try? JSONDecoder().decode([String: [String: String]].self, from:jsonFile)) ?? [:]
-
-
-
-func FindKey(key:String) -> String{
-    var clue = ""
-    for i in 0..<arrayAgr.count{
-        if arrayAgr[i] == key{
-            clue = arrayAgr[i+1]
-        }
-    }
-   
-    return clue
-
-}
 
 func FindWithKeyL(l:String){
     for (word1,word2) in words{
@@ -72,9 +56,7 @@ func FindAll(){
     }
 } 
 
-struct Translator: ParsableCommand {
-   
-    
+struct AppLocalization: ParsableCommand {
     @Option(name: .shortAndLong, help: "The word selected for translation")
     var key: String?
     
@@ -101,5 +83,4 @@ struct Translator: ParsableCommand {
 
     }
 }
-
-Translator.main()
+AppLocalization.main()
