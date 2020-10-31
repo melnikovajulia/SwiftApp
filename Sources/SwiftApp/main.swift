@@ -12,7 +12,7 @@ else{
 
 words = (try? JSONDecoder().decode([String: [String: String]].self, from:jsonFile)) ?? [:]
 
-func FindWithKeyL(l:String){
+func findWithKeyL(l:String){
     for (word1,word2) in words{
         for (language,word3) in word2{
             if l == language{
@@ -22,7 +22,7 @@ func FindWithKeyL(l:String){
         }
     }
 }
-func FindWithKeyK(k:String) {
+func findWithKeyK(k:String) {
     for (word1,word2) in words{
         if k == word1{
             for (language,word3) in word2{
@@ -33,7 +33,7 @@ func FindWithKeyK(k:String) {
     }
 }
 
-func FindWithKeyKAndL(k:String,l:String){
+func findWithKeyKAndL(k:String,l:String){
     for (word1,word2) in words{
         if k == word1{
             for (language,word3) in word2{
@@ -46,7 +46,7 @@ func FindWithKeyKAndL(k:String,l:String){
     }
 }
 
-func FindAll(){
+func findAll(){
     for (word1,word2) in words{
         print("\(word1)")
             for (language,word3) in word2{
@@ -66,16 +66,16 @@ struct AppLocalization: ParsableCommand {
     func run() throws {
 
         if  language == nil, let key:String = key {
-            FindWithKeyK(k:key)
+            findWithKeyK(k:key)
         }
         else if  key == nil, let language:String = language{
-            FindWithKeyL(l:language)
+            findWithKeyL(l:language)
         } 
         else if  let key:String = key, let language:String = language{
-            FindWithKeyKAndL(k:key,l:language)
+            findWithKeyKAndL(k:key,l:language)
         } 
         else if key == nil, language == nil{
-            FindAll()
+            findAll()
         }
         if flag == false  {
             print("Not found")
