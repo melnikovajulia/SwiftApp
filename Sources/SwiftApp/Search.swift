@@ -1,5 +1,7 @@
 class Search: SearchProtocol {
 
+    let key: String
+    let language: String
     var outputString = ""
     var words: [String: [String: String]]
 
@@ -9,25 +11,25 @@ class Search: SearchProtocol {
 
     init (getData: GetDataProtocol, outputData: OutputProtocol) {
         self.getData = getData
-        self.words = getData.getData()
+        self.words = getData.GetData()
         self.outputData = outputData
     } 
     
-    func search(key: String?, language: String?) -> String {
-        if let key: String = key && let language: String = language {
+    func search(newKey: String?, newLanguage: String?) -> String {
+        if  key == newKey &&  language == newLanguage {
                 outputString = findWithKeyAndLanguage(key: key, language: language)
             }
-        else if let key: String = key && let language: String != language {
+        else if key == newKey &&  language != language {
                 let dictionary = findWithKey(key: key)
-                outputString = outputData.outputLangAndVal(dictionary: dictionary)
+                outputString = outputData.outputLangAndVal(words: dictionary)
             }
-        else if let language: String = language && let key: String != key{
-                let dictionary = findWithLanguage(language: newLanguage)
-                outputString = outputData.outputKeyAndVal(dictionary: dictionary)
+        else if  language == language && key != newKey{
+                let dictionary = findWithLanguage(language: language)
+                outputString = outputData.outputKeyAndVal(words: dictionary)
             }
-        else if let language: String != language && let key: String != key{
+        else if  language != language && key != newKey{
                 let dictionary = findAll()
-                outputString = outputData.outputAllWords(dictionary: dictionary)
+                outputString = outputData.outputAllWords(words: dictionary)
             }
         if outputString == "" {
             return "Not found"

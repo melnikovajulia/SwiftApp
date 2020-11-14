@@ -3,12 +3,12 @@ import Foundation
 class Update: UpdateProtocol {
 
     let writing: WritingDataProtocol
-    let gettingData: GetDataProtocol
+    let getData: GetDataProtocol
     var words: [String: [String: String]]
 
-    init (gettingData: GetDataProtocol, writing: WritingDataProtocol) { 
-        self.gettingData = gettingData
-        self.words = gettingData.getData()
+    init (getData: GetDataProtocol, writing: WritingDataProtocol) { 
+        self.getData = getData
+        self.words = getData.GetData()
         self.writing = writing
     }
 

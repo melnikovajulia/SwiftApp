@@ -1,4 +1,4 @@
-class PrintData: PrintDataProtocol {
+class PrintData:PrintDataProtocol {
     func printData(data: String) {
         print(data)
     }

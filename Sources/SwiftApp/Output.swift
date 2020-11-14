@@ -1,5 +1,5 @@
-class OutputData: OutputDataProtocol {
-    var outputString = "" :String
+class OutputData: OutputProtocol {
+    var outputString = "" 
 
     func outputLangAndVal(words: [String:String]) -> String {
         for (language, value) in words {
@@ -22,16 +22,16 @@ class OutputData: OutputDataProtocol {
                 outputString += "\n\(key) = \(value)"
             }
         }
-        return lines
+        return outputString
     }
 
     func outputAllWords (words: [String: [String: String]]) -> String {
         for (word, langAndVal) in words {
-            if outputString== "" {
+            if outputString == "" {
                 outputString = word
             }
             else {
-                outputString+= "\n\(word)"
+                outputString += "\n\(word)"
             }
             for (language, value) in langAndVal {
                     outputString += "\n\(language):\(value)"

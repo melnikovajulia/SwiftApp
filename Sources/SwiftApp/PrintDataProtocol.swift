@@ -1,3 +1,3 @@
-protocol PrintingDataProtocol {
+protocol PrintDataProtocol {
     func printData(data: String) 
 }

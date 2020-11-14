@@ -35,19 +35,18 @@ func main() {
     let container = Container()
     let argumentParser = container.argumentParser
 
-    guard let arguments = argumentParser.parse() else {
-        container.print.printData(data: container.help.help())
-        exit(0)
+    guard let argument = argumentParser.parse() else {
+        return
     }
 
-    switch arguments {
+    switch argument {
         case .search(let key, let language):
-          let outputString = container.search.search(key: key, language: language)
+          let outputString = container.search.search(newKey: key, newLanguage: language)
           container.print.printData(data: outputString)
         case .update(let word, let key, let language):
-          container.update.update(newWord: word, key: key, language: language)
+          container.update.update(word: word, key: key, language: language)
         case .delete(let key, let language):
-          container.delete.delete(key: key, language: language)
+          container.delete.delete(newKey: key, newLanguage: language)
     }  
 }
 main()

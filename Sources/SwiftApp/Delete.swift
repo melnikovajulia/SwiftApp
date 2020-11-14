@@ -1,44 +1,46 @@
 import Foundation
 
 class Delete: DeleteProtocol {
-    let writing: WriterDataProtocol
-    let gettingData: GetDataProtocol
+    let writing: WritingDataProtocol
+    let getData: GetDataProtocol
+    let key: String
+    let language: String
 
     var words: [String: [String: String]]
 
-    init (gettingData: GetDataProtocol, writing: WritingDataProtocol) { 
-        self.gettingData = gettingData
-        self.words = gettingData.getData()
+    init (getData: GetDataProtocol, writing: WritingDataProtocol) { 
+        self.getData = getData
+        self.words = getData.GetData()
         self.writing = writing
     }
 
-    func delete(key: String?, language: String?) {
-        if let key: String = key && let language: String = language{
-            delete(key: key, language: language)
+    func delete(newKey: String?, newLanguage: String?) {
+        if key == newKey && language == newLanguage{
+            deleteWithKeyAndLang(newKey: key, newLanguage: language)
         }
-        else if let key: String = key && let language: String != language{
-            delete(key: newKey)
+        else if key == newKey && language == newLanguage{
+            deleteWithKey(newKey: key)
         }
-        else if let key: String != key && let language: String = language{
-            delete(language: newLanguage)
+        else if key != newKey && language == newLanguage{
+            deleteWithLang(newLanguage: language)
         }
         
         writing.writingData(data: words)  
     }
 
-    func delete(key: String, language: String) {
-        guard var dictionary = words[key] else {
+    func deleteWithKeyAndLang(newKey: String, newLanguage: String) {
+        guard var dictionary = words[newKey] else {
             exit(0)
         } 
-        dictionary[language] = nil
-        words[key] = dictionary
+        dictionary[newLanguage] = nil
+        words[newKey] = dictionary
     }
 
-    func delete(key: String) {
+    func deleteWithKey(newKey: String) {
         words[key] = nil
     }
 
-    func delete(language: String) {
+    func deleteWithLang(newLanguage: String) {
         for (word, dictionary) in words {
             var dictionary = dictionary
             dictionary[language] = nil
