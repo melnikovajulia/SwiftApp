@@ -1,86 +1,54 @@
 import Foundation
 import ArgumentParser
-
-var flag = false
-let path = "Sources/SwiftApp/words.json"
-var words: [String: [String: String]]
-
-guard let jsonFile = FileManager.default.contents(atPath: path)
-else{
-    exit(0)
-}
-
-words = (try? JSONDecoder().decode([String: [String: String]].self, from:jsonFile)) ?? [:]
-
-func findWithKeyL(l:String){
-    for (word1,word2) in words{
-        for (language,word3) in word2{
-            if l == language{
-                print("\(word1)=\(word3)")
-                flag = true
-            }
-        }
+import Foundation
+import ArgumentParser
+class Container {
+    var argumentParser: ArgumentParserProtocol {
+        ArgumentParser()
     }
-}
-func findWithKeyK(k:String) {
-    for (word1,word2) in words{
-        if k == word1{
-            for (language,word3) in word2{
-                print("\(language):\(word3)")
-                flag = true
-            }
-        }
+    var writing: WritingDataProtocol {
+        WritingData()
+    }
+    var getData: GetDataProtocol {
+        GetData()
+    }
+    var output: OutputProtocol {
+        OutputData()
+    }
+    var search: SearchProtocol {
+        Search(getData: getData, outputData: output)
+    }
+    var update: UpdateProtocol {
+        Update(getData: getData, writing: writing)
+    }
+    var delete: DeleteProtocol {
+        Delete(getData: getData, writing: writing)
+    }
+    var print: PrintDataProtocol {
+        PrintData()
     }
 }
 
-func findWithKeyKAndL(k:String,l:String){
-    for (word1,word2) in words{
-        if k == word1{
-            for (language,word3) in word2{
-                if l==language{
-                    print("\(word3)")
-                    flag = true
-                }
-            }
-        }
+
+func main() {
+
+    let container = Container()
+    let argumentParser = container.argumentParser
+
+    guard let arguments = argumentParser.parse() else {
+        container.print.printData(data: container.help.help())
+        exit(0)
     }
+
+    switch arguments {
+        case .search(let key, let language):
+          let outputString = container.search.search(key: key, language: language)
+          container.print.printData(data: outputString)
+        case .update(let word, let key, let language):
+          container.update.update(newWord: word, key: key, language: language)
+        case .delete(let key, let language):
+          container.delete.delete(key: key, language: language)
+    }  
 }
+main()
 
-func findAll(){
-    for (word1,word2) in words{
-        print("\(word1)")
-            for (language,word3) in word2{
-            print("\(language):\(word3)") 
-            flag = true
-        }
-    }
-} 
-
-struct AppLocalization: ParsableCommand {
-    @Option(name: .shortAndLong, help: "The word selected for translation")
-    var key: String?
-    
-    @Option(name: .shortAndLong, help: "Language selected for translation")
-    var language: String?
-
-    func run() throws {
-
-        if  language == nil, let key:String = key {
-            findWithKeyK(k:key)
-        }
-        else if  key == nil, let language:String = language{
-            findWithKeyL(l:language)
-        } 
-        else if  let key:String = key, let language:String = language{
-            findWithKeyKAndL(k:key,l:language)
-        } 
-        else if key == nil, language == nil{
-            findAll()
-        }
-        if flag == false  {
-            print("Not found")
-        }
-
-    }
-}
-AppLocalization.main()
