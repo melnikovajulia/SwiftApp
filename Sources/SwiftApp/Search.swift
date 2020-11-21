@@ -1,7 +1,7 @@
 class Search: SearchProtocol {
 
-    let key = ""
-    let language = ""
+    //let key = ""
+    //let language = ""
     var outputString = ""
     var words: [String: [String: String]]
 
@@ -16,21 +16,25 @@ class Search: SearchProtocol {
     } 
     
     func search(newKey: String?, newLanguage: String?) -> String {
-        if  key == newKey &&  language == newLanguage {
+        if let key: String = newKey {
+            if let language: String = newLanguage { 
                 outputString = findWithKeyAndLanguage(key: key, language: language)
             }
-        else if key == newKey &&  language != language {
+            else {
                 let dictionary = findWithKey(key: key)
                 outputString = outputData.outputLangAndVal(words: dictionary)
             }
-        else if  language == language && key != newKey{
+        }
+        else {
+            if let language: String = newLanguage{
                 let dictionary = findWithLanguage(language: language)
                 outputString = outputData.outputKeyAndVal(words: dictionary)
             }
-        else if  language != language && key != newKey{
+             else{
                 let dictionary = findAll()
                 outputString = outputData.outputAllWords(words: dictionary)
             }
+        }
         if outputString == "" {
             return "Not found"
         }
