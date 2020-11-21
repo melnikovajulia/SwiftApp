@@ -5,9 +5,9 @@ class WritingData: WritingDataProtocol {
 
         let encoderData = try? JSONEncoder().encode(data)
         
-        guard let url = Bundle.module.url(forResource: "data", withExtension: "json")
+        guard let url = Bundle.module.url(forResource: "words", withExtension: "json")
         else {
-            print("Файл не найден")
+            print("File not found")
             exit(0)
         }
          try? encoderData?.write(to: url)
