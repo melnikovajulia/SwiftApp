@@ -5,19 +5,25 @@
 2. cd/SwiftApp/Sources
 
 ## Запуск проекта
-swift run 
-OR
-./.build/debug/SwiftApp
+swift run SwiftApp < choice > [< word >] [--k < k >] [--l < l >]
 
 OVERVIEW: Application helper terminal for localization
 
-USAGE: ./.build/debug/SwiftApp [--key <key>] [--language <language>]
+
+ARGUMENTS:
+
+< choice > To search for words
+
+< word > The word you want to add or update in the dictionary
 
 OPTIONS:
--k, --key <key>             The word selected for translation
--l, --language <language>   Language selected for translation
+-k, --key < key >             The word selected for translation
+
+-l, --language < language >   Language selected for translation
 
 -h, --help                  Show help information
+
+
 
 
 
