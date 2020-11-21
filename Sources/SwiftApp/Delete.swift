@@ -3,8 +3,8 @@ import Foundation
 class Delete: DeleteProtocol {
     let writing: WritingDataProtocol
     let getData: GetDataProtocol
-    let key: String
-    let language: String
+    let key = ""
+    let language = ""
 
     var words: [String: [String: String]]
 

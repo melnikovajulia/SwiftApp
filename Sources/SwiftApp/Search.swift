@@ -1,7 +1,7 @@
 class Search: SearchProtocol {
 
-    let key: String
-    let language: String
+    let key = ""
+    let language = ""
     var outputString = ""
     var words: [String: [String: String]]
 

@@ -43,11 +43,17 @@ func main() {
         case .search(let key, let language):
           let outputString = container.search.search(newKey: key, newLanguage: language)
           container.print.printData(data: outputString)
+        
         case .update(let word, let key, let language):
           container.update.update(word: word, key: key, language: language)
+        
         case .delete(let key, let language):
           container.delete.delete(newKey: key, newLanguage: language)
-    }  
+        
+        default:
+          
+        
+    }
 }
 main()
 
