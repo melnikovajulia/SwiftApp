@@ -49,9 +49,9 @@ func main() {
         
         case .delete(let key, let language):
           container.delete.delete(newKey: key, newLanguage: language)
-        
-        default:
-          
+
+        case .help(message: let message):
+        container.print.printData(data: message)     
         
     }
 }
