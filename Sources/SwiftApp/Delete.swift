@@ -3,8 +3,6 @@ import Foundation
 class Delete: DeleteProtocol {
     let writing: WritingDataProtocol
     let getData: GetDataProtocol
-    let key = ""
-    let language = ""
 
     var words: [String: [String: String]]
 
@@ -15,18 +13,21 @@ class Delete: DeleteProtocol {
     }
 
     func delete(newKey: String?, newLanguage: String?) {
-        if key == newKey && language == newLanguage{
+        if let key: String = newKey {
+            if let language: String = newLanguage {
             deleteWithKeyAndLang(newKey: key, newLanguage: language)
+            }
+            else {
+                deleteWithKey(newKey: key)
+            }
         }
-        else if key == newKey && language == newLanguage{
-            deleteWithKey(newKey: key)
-        }
-        else if key != newKey && language == newLanguage{
-            deleteWithLang(newLanguage: language)
-        }
-        
+        else {
+            if let language: String = newLanguage{
+                deleteWithLang(newLanguage: language)
+            }
         writing.writingData(data: words)  
     }
+}
 
     func deleteWithKeyAndLang(newKey: String, newLanguage: String) {
         guard var dictionary = words[newKey] else {
@@ -37,16 +38,15 @@ class Delete: DeleteProtocol {
     }
 
     func deleteWithKey(newKey: String) {
-        words[key] = nil
+        words[newKey] = nil
     }
 
     func deleteWithLang(newLanguage: String) {
         for (word, dictionary) in words {
             var dictionary = dictionary
-            dictionary[language] = nil
+            dictionary[newLanguage] = nil
             words[word] = dictionary
         }
     }   
 
-    
-}
+    }   

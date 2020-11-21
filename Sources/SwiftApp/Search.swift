@@ -41,7 +41,7 @@ class Search: SearchProtocol {
         return outputString
     }
     func findWithKeyAndLanguage(key: String, language: String) -> String {
-         for (word, dictionary) in words {
+        for (word, dictionary) in words {
             if key == word {
                 for (languageCurrent, value) in dictionary {
                     if language == languageCurrent {
