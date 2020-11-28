@@ -29,7 +29,7 @@ class Delete: DeleteProtocol {
     }
 }
 
-    func deleteWithKeyAndLang(newKey: String, newLanguage: String) {
+    private func deleteWithKeyAndLang(newKey: String, newLanguage: String) {
         guard var dictionary = words[newKey] else {
             exit(0)
         } 
@@ -37,11 +37,11 @@ class Delete: DeleteProtocol {
         words[newKey] = dictionary
     }
 
-    func deleteWithKey(newKey: String) {
+    private func deleteWithKey(newKey: String) {
         words[newKey] = nil
     }
 
-    func deleteWithLang(newLanguage: String) {
+    private func deleteWithLang(newLanguage: String) {
         for (word, dictionary) in words {
             var dictionary = dictionary
             dictionary[newLanguage] = nil
@@ -49,4 +49,4 @@ class Delete: DeleteProtocol {
         }
     }   
 
-    }   
+}   

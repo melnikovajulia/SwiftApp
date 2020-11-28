@@ -1,7 +1,5 @@
 class Search: SearchProtocol {
 
-    //let key = ""
-    //let language = ""
     var outputString = ""
     var words: [String: [String: String]]
 
@@ -40,7 +38,7 @@ class Search: SearchProtocol {
         }
         return outputString
     }
-    func findWithKeyAndLanguage(key: String, language: String) -> String {
+    private func findWithKeyAndLanguage(key: String, language: String) -> String {
         for (word, dictionary) in words {
             if key == word {
                 for (languageCurrent, value) in dictionary {
@@ -55,7 +53,7 @@ class Search: SearchProtocol {
        return ""
     }
 
-    func findWithKey(key: String) -> [String:String] {
+    private func findWithKey(key: String) -> [String:String] {
         guard let dictionary = words[key] else {
             return [:]
         }
@@ -74,7 +72,7 @@ class Search: SearchProtocol {
         return dictionaryWordAndValue
     } 
 
-    func findAll() -> [String: [String: String]] {
+    private func findAll() -> [String: [String: String]] {
         return words
     }
 }
