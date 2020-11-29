@@ -29,7 +29,7 @@ class Container {
 }
 
 
-func swiftApp()-> Int {
+    public func swiftApp()-> Int {
 
     let container = Container()
     var result = TestResult.notFoundArguments

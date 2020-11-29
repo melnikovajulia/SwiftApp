@@ -7,13 +7,13 @@ do {
     case 0:
       exit(Int32(result))
     case 1:
-      print("Неправильная команда")
+      print("Сommand is entered incorrectlyа")
     case 2:
-      print("Не удалось выполнить команду")
+      print("Failed to complete command")
     case 3:
-      print("Ошибка в количестве аргументов")
+      print("Invalid number of arguments")
     default:
-      print("Неизвестная ошибка")
+      print("Unknown error")
     }    
 } 
 
