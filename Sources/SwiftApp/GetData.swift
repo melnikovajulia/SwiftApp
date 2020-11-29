@@ -1,4 +1,5 @@
 import Foundation
+import class Foundation.Bundle
 
 class GetData: GetDataProtocol {
     func GetData() -> [String: [String: String]] {
@@ -18,3 +19,6 @@ class GetData: GetDataProtocol {
         return words
     }
 }
+
+
+

@@ -1,3 +1,3 @@
 protocol DeleteProtocol {
-    func delete(newKey: String?, newLanguage: String?)
+    func delete(newKey: String?, newLanguage: String?) -> TestResult
 }

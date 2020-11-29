@@ -1,3 +1,3 @@
 protocol SearchProtocol {
-    func search(newKey: String?, newLanguage: String?) -> String
+    func search(newKey: String?, newLanguage: String?) -> (result: TestResult, outputString: String)
 }

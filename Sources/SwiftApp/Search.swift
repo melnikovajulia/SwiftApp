@@ -13,43 +13,46 @@ class Search: SearchProtocol {
         self.outputData = outputData
     } 
     
-    func search(newKey: String?, newLanguage: String?) -> String {
+    func search(newKey: String?, newLanguage: String?) -> (result: TestResult, outputString: String) {
         if let key: String = newKey {
             if let language: String = newLanguage { 
                 outputString = findWithKeyAndLanguage(key: key, language: language)
+                return (.successfullSearch,outputString)
             }
             else {
                 let dictionary = findWithKey(key: key)
                 outputString = outputData.outputLangAndVal(words: dictionary)
+                return (.successfullSearch,outputString)
             }
         }
         else {
             if let language: String = newLanguage{
                 let dictionary = findWithLanguage(language: language)
                 outputString = outputData.outputKeyAndVal(words: dictionary)
+                return (.successfullSearch,outputString)
             }
              else{
                 let dictionary = findAll()
                 outputString = outputData.outputAllWords(words: dictionary)
+                return (.successfullSearch,outputString)
             }
         }
         if outputString == "" {
-            return "Not found"
+            return (.failedSearch,"")
         }
-        return outputString
+         return (.successfullSearch,outputString)
     }
+
     private func findWithKeyAndLanguage(key: String, language: String) -> String {
         for (word, dictionary) in words {
             if key == word {
                 for (languageCurrent, value) in dictionary {
                     if language == languageCurrent {
-
                         return value
                     }
                 }
             }
         }
-         
        return ""
     }
 

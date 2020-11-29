@@ -12,7 +12,7 @@ class Delete: DeleteProtocol {
         self.writing = writing
     }
 
-    func delete(newKey: String?, newLanguage: String?) {
+    func delete(newKey: String?, newLanguage: String?) -> TestResult {
         if let key: String = newKey {
             if let language: String = newLanguage {
             deleteWithKeyAndLang(newKey: key, newLanguage: language)
@@ -25,8 +25,13 @@ class Delete: DeleteProtocol {
             if let language: String = newLanguage{
                 deleteWithLang(newLanguage: language)
             }
+            else{
+                return .failedDeleted
+            }
         writing.writingData(data: words)  
+        
     }
+    return .successfullDeleted
 }
 
     private func deleteWithKeyAndLang(newKey: String, newLanguage: String) {

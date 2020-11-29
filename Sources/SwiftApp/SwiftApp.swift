@@ -1,7 +1,6 @@
 import Foundation
 import ArgumentParser
-import Foundation
-import ArgumentParser
+
 class Container {
     var argumentParser: ArgumentParserProtocol {
         ArgumentParser()
@@ -30,30 +29,49 @@ class Container {
 }
 
 
-func main() {
+func swiftApp()-> Int {
 
     let container = Container()
+    var result = TestResult.notFoundArguments
     let argumentParser = container.argumentParser
-
     guard let argument = argumentParser.parse() else {
-        return
+        exit(0)
     }
 
     switch argument {
         case .search(let key, let language):
-          let outputString = container.search.search(newKey: key, newLanguage: language)
+          let outputString = container.search.search(newKey: key, newLanguage: language).outputString
+          let result = container.search.search(newKey: key, newLanguage: language).result
           container.print.printData(data: outputString)
-        
         case .update(let word, let key, let language):
-          container.update.update(word: word, key: key, language: language)
-        
+            result = container.update.update(word: word, key: key, language: language)
         case .delete(let key, let language):
-          container.delete.delete(newKey: key, newLanguage: language)
-
+            result = container.delete.delete(newKey: key, newLanguage: language)
         case .help(message: let message):
-        container.print.printData(data: message)     
+            container.print.printData(data: message)  
+            result = TestResult.failedConvertArguments
         
     }
+
+    switch result {
+        case .failedSearch:
+            return 1
+        case .failedDeleted:
+            return 2
+        case .failedConvertArguments:
+            return 3
+        case .notFoundArguments:
+            return 4
+        case .uncorrectKeyK:
+            return 5
+        case .uncorrectLanguage:
+            return 6
+        case .argumentsIsInvalid:
+            return 7
+        default:
+            return 0 
+    }
 }
-main()
+
+
 

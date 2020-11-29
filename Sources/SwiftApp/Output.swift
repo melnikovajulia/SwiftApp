@@ -1,7 +1,7 @@
 class OutputData: OutputProtocol {
     var outputString = "" 
 
-    private func outputLangAndVal(words: [String:String]) -> String {
+    internal func outputLangAndVal(words: [String:String]) -> String {
         for (language, value) in words {
             if outputString == "" {
                 outputString = "\(language):\(value)"
@@ -13,7 +13,7 @@ class OutputData: OutputProtocol {
         return outputString
     }
     
-    private func outputKeyAndVal(words: [String:String]) -> String {
+    internal func outputKeyAndVal(words: [String:String]) -> String {
         for (key, value) in words {
             if outputString == "" {
                 outputString = "\(key) = \(value)"
@@ -25,7 +25,7 @@ class OutputData: OutputProtocol {
         return outputString
     }
 
-    private func outputAllWords (words: [String: [String: String]]) -> String {
+    internal func outputAllWords (words: [String: [String: String]]) -> String {
         for (word, langAndVal) in words {
             if outputString == "" {
                 outputString = word

@@ -1,3 +1,3 @@
 protocol UpdateProtocol {
-    func update(word: String, key: String, language: String)
+    func update(word: String, key: String, language: String) -> TestResult
 }

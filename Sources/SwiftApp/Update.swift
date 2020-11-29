@@ -12,7 +12,7 @@ class Update: UpdateProtocol {
         self.writing = writing
     }
 
-    func update(word: String, key: String, language: String) {
+    func update(word: String, key: String, language: String) -> TestResult {
         var dictionary = words[key] ?? [:]
         if dictionary.isEmpty {
             words[key] = [language : word]
@@ -22,5 +22,6 @@ class Update: UpdateProtocol {
             words[key] = dictionary
         }
         writing.writingData(data: words)
+        return .successfullUpdate
     }
 }
