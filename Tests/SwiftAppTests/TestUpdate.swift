@@ -6,7 +6,6 @@ class TestUpdate: XCTestCase {
     var update: Update!
     var getData: MockGetData!
     var write: MockWritingData!
-    var search: MockSearch!
     var output: MockOutput!
     
     override func setUp() {
@@ -17,7 +16,6 @@ class TestUpdate: XCTestCase {
     }
 
     override func tearDown() {
-        search = nil
         output = nil
         update = nil
         getData = nil

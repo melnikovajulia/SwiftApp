@@ -51,26 +51,10 @@ final class TestSearch: XCTestCase {
         XCTAssertEqual(output.outputAllWordsParam , ["day": ["ru":"День"]]) 
     }
 
-    func testSearchWithUncorrectKeyKAndLanguage() throws {
-        let key = "horse"
-        let language = "mol"
-        getData.getDataResult = ["cat": ["en":"Cat"]]
-        let result = search.search(newKey: key, newLanguage: language)
-        XCTAssertEqual(result.result, TestResult.argumentsIsInvalid)
-        XCTAssertEqual(getData.getDataCallsCount, 1)
-        XCTAssertEqual(output.outputAllWordsCallsCount, 1)
-        XCTAssertEqual(output.outputAllWordsParam, TestResult.argumentsIsInvalid)
-    }
-
-    
-
-   
-
     static var allTests = [
         ("testSearchWithKeyKAndLanguage", testSearchWithKeyKAndLanguage),
         ("testSearchWithKeyK", testSearchWithKeyK),
         ("testSearchWithLanguage", testSearchWithLanguage),
         ("testSearchWithoutArguments", testSearchWithoutArguments),
-        ("testSearchWithUncorrectKeyKAndLanguage", testSearchWithUncorrectKeyKAndLanguage),
     ]
 }

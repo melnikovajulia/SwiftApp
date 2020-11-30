@@ -6,14 +6,12 @@ final class TestDelete: XCTestCase {
     var delete: Delete!
     var getData: MockGetData!
     var write: MockWritingData!
-    var search: MockSearch!
     var output: MockOutput!
 
     override func setUp() {
         super.setUp()
         getData = MockGetData()
         write = MockWritingData()
-        search = MockSearch()
         output = MockOutput()
         delete = Delete(getData: getData, writing: write)
     }
