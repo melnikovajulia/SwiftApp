@@ -1,19 +1,19 @@
-@testable import App
+@testable import SwiftApp
 import XCTest
 
 class TestUpdate: XCTestCase {
 
     var update: Update!
     var getData: MockGetData!
-    var write: MockWriterData!
+    var write: MockWritingData!
     var search: MockSearch!
     var output: MockOutput!
     
     override func setUp() {
         super.setUp()
         getData = MockGetData()
-        write = MockWriterData()
-        update = Update(getData: getData, write: write,output: output, search: search)
+        write = MockWritingData()
+        update = Update(getData: getData, writing: write)
     }
 
     override func tearDown() {

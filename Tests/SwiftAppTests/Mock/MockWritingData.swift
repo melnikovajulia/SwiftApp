@@ -7,5 +7,5 @@ class MockWritingData : WritingDataProtocol {
     func writingData(data: [String: [String: String]]) {
        writeCallsCount += 1
        writeDataParam = (data)
-    }
+    } 
 }

@@ -1,7 +1,7 @@
 import Foundation
 @testable import SwiftApp
 
-class GetDataMock: GetDataProtocol {
+class MockGetData: GetDataProtocol {
     var getDataParameters: ()!
     var getDataResult: [String: [String: String]] = [:]
     var getDataCallsCount = 0

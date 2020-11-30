@@ -34,7 +34,7 @@ class Container {
     let container = Container()
     var result = TestResult.notFoundArguments
     let argumentParser = container.argumentParser
-    guard let argument = argumentParser.parse() else {
+    guard let argument = argumentParser.parse(nil) else {
         exit(0)
     }
 

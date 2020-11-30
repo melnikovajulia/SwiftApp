@@ -1,32 +1,32 @@
 @testable import SwiftApp
-class MockOutputData : OutputDataProtocol {
-    var outputParam: ([String:String])!
-    var outputResult = ""
-    var outputCallsCount = 0
+class MockOutput : OutputProtocol {
+    var outputLangAndValParam: ([String:String])!
+    var outputLangAndValCallsCount = 0
+    var outputLangAndValResult = ""
 
     func outputLangAndVal(words: [String:String]) -> String {
-        outputCallsCount += 1
-        outputParam = (words)
-        return outputResult
+        outputLangAndValCallsCount += 1
+        outputLangAndValParam = (words)
+        return outputLangAndValResult
     }
     
-    var outputParam: ([String:String])!
-    var outputResult = ""
-    var outputCallsCount = 0
+    var outputKeyAndValParam: ([String:String])!
+    var outputKeyAndValResult = ""
+    var outputKeyAndValCallsCount = 0
 
     func outputKeyAndVal(words: [String:String]) -> String {
-        outputCallsCount += 1
-        outputParam = (words)
-        return outputResult
+        outputKeyAndValCallsCount += 1
+        outputKeyAndValParam = (words)
+        return outputKeyAndValResult
     }
     
-    var outputParam: ([String: [String: String]])!
-    var outputResult = ""
-    var outputCallsCount = 0
+    var outputAllWordsParam: ([String: [String: String]])!
+    var outputAllWordsResult = ""
+    var outputAllWordsCallsCount = 0
     
     func outputAllWords (words: [String: [String: String]]) -> String {
-        outputCallsCount += 1
-        outputParam = (words)
-        return outputResult
+        outputAllWordsCallsCount += 1
+        outputAllWordsParam = (words)
+        return outputAllWordsResult
     }
 }

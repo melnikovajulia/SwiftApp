@@ -1,4 +1,4 @@
-@testable import App
+@testable import SwiftApp
 import XCTest
 
 class TestArgumentParser: XCTestCase {
@@ -15,7 +15,7 @@ class TestArgumentParser: XCTestCase {
     }
     
     func testSearchWithKey() throws {
-        let result = argumentParser.toParse(["search", "-k", "cat"])
+        let result = argumentParser.parse(["search", "-k", "cat"])
         switch result {
             case .search(let key, let language):
               XCTAssertEqual(key, "cat")
@@ -26,7 +26,7 @@ class TestArgumentParser: XCTestCase {
     }
 
     func testSearchWithLanguage() throws {
-        let result = argumentParser.toParse(["search", "-l", "en"])
+        let result = argumentParser.parse(["search", "-l", "en"])
         switch result {
             case .search(let key, let language):
               XCTAssertEqual(key, nil)
@@ -37,7 +37,7 @@ class TestArgumentParser: XCTestCase {
     }
 
     func testSearchWithKeyAndLanguage() throws {
-        let result = argumentParser.toParse(["search", "-k", "cat", "-l", "en"])
+        let result = argumentParser.parse(["search", "-k", "cat", "-l", "en"])
         switch result {
             case .search(let key, let language):
               XCTAssertEqual(key, "cat")
@@ -48,7 +48,7 @@ class TestArgumentParser: XCTestCase {
     }
 
     func testSearchNotKeyNotLanguage() throws {
-        let result = argumentParser.toParse(["search"])
+        let result = argumentParser.parse(["search"])
         switch result {
             case .search(let key, let language):
               XCTAssertEqual(key, nil)
@@ -59,7 +59,7 @@ class TestArgumentParser: XCTestCase {
     }
 
     func testDeleteWithKeyAndLanguage() throws {
-        let result = argumentParser.toParse(["delete", "-k", "hello", "-l", "es"])
+        let result = argumentParser.parse(["delete", "-k", "hello", "-l", "es"])
         switch result {
             case .delete(let key, let language):
               XCTAssertEqual(key, "hello")
@@ -70,7 +70,7 @@ class TestArgumentParser: XCTestCase {
     }
 
     func testDeleteWithKey() throws {
-        let result = argumentParser.toParse(["delete", "-k", "hello"])
+        let result = argumentParser.parse(["delete", "-k", "hello"])
         switch result {
             case .delete(let key, let language):
               XCTAssertEqual(key, "hello")
@@ -81,7 +81,7 @@ class TestArgumentParser: XCTestCase {
     }
 
     func testDeleteWithLanguage() throws {
-        let result = argumentParser.toParse(["delete", "-l", "pt"])
+        let result = argumentParser.parse(["delete", "-l", "pt"])
         switch result {
             case .delete(let key, let language):
               XCTAssertEqual(key, nil)
@@ -92,7 +92,7 @@ class TestArgumentParser: XCTestCase {
     }
 
     func testUpdate() throws {
-        let result = argumentParser.toParse(["update", "Dog", "-k", "dog", "-l", "en"])
+        let result = argumentParser.parse(["update", "Dog", "-k", "dog", "-l", "en"])
         switch result {
             case .update(let word, let key, let language):
               XCTAssertEqual(word, "Dog")
@@ -104,19 +104,19 @@ class TestArgumentParser: XCTestCase {
     }
 
     func testNotCorrectCommand() throws {
-        if argumentParser.toParse(["go"]) != nil {
+        if argumentParser.parse(["go"]) != nil {
         XCTFail(TestResult.failedConvertArguments.errorDescription)
       }
     }
 
     func testNotCommand() throws {
-      if argumentParser.toParse([""]) != nil {
+      if argumentParser.parse([""]) != nil {
         XCTFail(TestResult.failedConvertArguments.errorDescription)
       }
     }
 
     func testUpdateNotWord() throws {
-      if argumentParser.toParse(["update -k house -l tur"]) != nil {
+      if argumentParser.parse(["update -k house -l tur"]) != nil {
         XCTFail(TestResult.failedConvertArguments.errorDescription)
       }
     }

@@ -3,11 +3,11 @@
 class MockDelete: DeleteProtocol {
 
 	var deleteParam: (String?, String?)!
-    var deleteResult: ResultTest = .successfullDeleted
+    var deleteResult: TestResult = .successfullDeleted
     var deleteCallsCount = 0
-    func delete(newKey: String?, newLanguage: String?) -> ResultTest {
+    func delete(newKey: String?, newLanguage: String?) -> TestResult {
         deleteCallsCount += 1
-        deleteParam = (key, language)
+        deleteParam = (newKey, newLanguage)
         return deleteResult
     }
 }
