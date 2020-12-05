@@ -1,7 +1,6 @@
 import Foundation
 import SwiftApp
 
-
 do {
     let result = swiftApp()
     switch result {
