@@ -19,7 +19,7 @@ class ArgumentParser : ArgumentParserProtocol{
             }
         }
         catch {
-            return .help(message: Commands.helpMessage())   
+            return nil   
         }
     }
 }
