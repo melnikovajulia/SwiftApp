@@ -1,13 +1,14 @@
 import Foundation
 import SwiftApp
 
+
 do {
     let result = swiftApp()
     switch result {
     case 0:
       exit(Int32(result))
     case 1:
-      print("Сommand is entered incorrectlyа")
+      print("Сommand is entered incorrect")
     case 2:
       print("Failed to complete command")
     case 3:
